@@ -2,10 +2,13 @@
 Projeto da disciplina PDWEL (Programação Dinâmica para Web), que consiste em um simples sistema Web para controle de empréstimo de livros de uma biblioteca, implementado em PHP com o framework Laravel.
 
 Alunos:
+
 Adriana Martins - SP3015572
+
 Rodrigo Gasperin - SP3014142
 
 Professor: Ugo Silva
+
 TADS - IFSP - 2021/1
 
 # Intruções de deployment
