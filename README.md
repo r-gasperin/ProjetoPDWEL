@@ -28,3 +28,4 @@ Requisitos mínimos:
  - Responsiva
 
 Você deve criar um projeto no GitHub com a descrição do projeto e a equipe integrante na página inicial, instruções de deployment.
+
