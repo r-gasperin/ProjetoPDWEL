@@ -7,24 +7,25 @@
 	<title>Cadastro de Pessoa</title>
 </head>
 <body>
-	<form action="">
+	<form action="{{ route('registrar_pessoa') }}" method="POST">
+		@csrf
 		<label>Nome</label><br/>
-		<input type="text" name="nome" /><br/>
+		<input type="text" name="nome" maxlength="100" /><br/>
 		
 		<label>CPF</label><br/>
-		<input type="text" name="cpf" /><br/>
+		<input type="text" name="cpf" maxlength="15"/><br/>
 		
 		<label>E-Mail</label><br/>
-		<input type="email" name="email" /><br/>
+		<input type="email" name="email" maxlength="150" /><br/>
 		
-		<label>Endereço</label><br/>
-		<input type="text" name="endereco" /><br/>
+		<label>EndereÃ§o</label><br/>
+		<input type="text" name="endereco"  maxlength="150"/><br/>
 		
 		<label>DDD</label><br/>
-		<input type="text" name="ddd" /><br/>
+		<input type="text" name="ddd"  maxlength="2"/><br/>
 		
 		<label>Telefone</label><br/>
-		<input type="text" name="telefone" /><br/>
+		<input type="text" name="telefone" maxlength="10" /><br/>
 		
 		<button>Salvar</button>
 	

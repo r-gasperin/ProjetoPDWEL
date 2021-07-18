@@ -7,7 +7,8 @@
 	<title>Cadastro de Livro</title>
 </head>
 <body>
-	<form action="">
+	<form action="{{ route('registrar_livro') }}" method="POST">
+		@csrf
 		<label>Nome</label><br/>
 		<input type="text" name="nome" /><br/>
 		
@@ -15,9 +16,9 @@
 		<input type="text" name="editora" /><br/>
 		
 		<label>Autor</label><br/>
-		<input type="email" name="autor" /><br/>
+		<input type="text" name="autor" /><br/>
 		
-		<label>Preço</label><br/>
+		<label>PreÃ§o</label><br/>
 		<input type="text" name="preco" /><br/>
 		
 		<label>Ano</label><br/>

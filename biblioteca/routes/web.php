@@ -18,4 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/pessoas/novo', 'PessoasController@create');
+Route::post('/pessoas/novo', 'PessoasController@store')->name('registrar_pessoa');
+
+
+
 Route::get('/livros/novo', 'LivrosController@create');
+Route::post('/livros/novo', 'LivrosController@store')->name('registrar_livro');
