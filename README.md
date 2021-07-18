@@ -15,7 +15,7 @@ TADS - IFSP - 2021/1
 # Intruções de deployment
 TODO
 
-# Descrição do Projeto Final:
+# Enunciado do Projeto Final:
 
 Vocês deverão implementar uma aplicação Web a ser entregue até o dia 30/07/21.
 Pode ser uma demanda pessoal ou profissional que você tenha.
@@ -28,4 +28,3 @@ Requisitos mínimos:
  - Responsiva
 
 Você deve criar um projeto no GitHub com a descrição do projeto e a equipe integrante na página inicial, instruções de deployment.
-
