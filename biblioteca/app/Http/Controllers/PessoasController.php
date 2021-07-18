@@ -51,4 +51,15 @@ class PessoasController extends Controller
 		return "Edição realizada com sucesso!!!";
 	}
 	
+	public function delete ($id){
+		$pessoa = Pessoa::findOrFail($id);
+		return view('pessoas.delete', ['pessoa' => $pessoa]);
+	}
+	
+	public function destroy ($id){
+		$pessoa = Pessoa::findOrFail($id);
+		$pessoa-> delete();
+		return "Pessoa Excluída com sucesso!!!";		
+	}
+	
 }
