@@ -25,4 +25,30 @@ class PessoasController extends Controller
 		
 		return "Cadastro realizado com sucesso!!!";
 	}
+	
+	public function show ($id){
+		$pessoa = Pessoa::findOrFail($id);
+		return view('pessoas.show', ['pessoa' => $pessoa]);	
+	}
+	
+	public function edit($id){
+		$pessoa = Pessoa::findOrFail($id);
+		return view('pessoas.edit', ['pessoa' => $pessoa]);
+	}
+	
+	public function update(Request $request, $id){
+
+		$pessoa = Pessoa::findOrFail($id);
+		$pessoa = $pessoa -> update([
+				'nome' => $request['nome'],
+				'cpf' => $request['cpf'],
+				'email' => $request['email'],
+				'endereco' => $request['endereco'],
+				'ddd' => $request['ddd'],
+				'telefone' => $request['telefone']
+				]);
+	
+		return "Edição realizada com sucesso!!!";
+	}
+	
 }

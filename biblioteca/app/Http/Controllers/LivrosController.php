@@ -24,4 +24,30 @@ class LivrosController extends Controller
 	
 		return "Cadastro realizado com sucesso!!!";
 	}
+	
+	public function show ($id){
+		$livro = Livro::findOrFail($id);
+		return view('livros.show', ['livro' => $livro]);
+	}
+	
+	public function edit ($id){
+		$livro = Livro::findOrFail($id);
+		return view('livros.edit', ['livro' => $livro]);
+	}
+	
+	public function update(Request $request, $id){
+		$livro = Livro::findOrFail($id);
+		$livro = $livro -> update([
+			'nome' => $request['nome'],
+			'editora' => $request['editora'],
+			'autor' => $request['autor'],
+			'preco' => $request['preco'],
+			'ano' => $request['ano']
+			]);
+		
+		return "Edição realizada com sucesso!!!";
+		
+	}
+	
+	
 }
