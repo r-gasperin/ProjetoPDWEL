@@ -1,0 +1,53 @@
+
+ * CONTROLLERS SÃO ASSOCIADOS ÀS VIEWS!!
+
+
+USUÁRIO NÃO AUTENTICADO (autenticado --> home)
+=======================
+get login: retorna página de login
+post login: envia form de login (redireciona p/ home)
+
+get register: retorna página de cadastro de **cliente**
+post register: envia form de cadastro de **cliente**
+
+
+USUÁRIO AUTENTICADO (não autenticado --> login)
+===================
+get /: retorna homepage (CLIENTE / GERENTE)
+ - se usuário autenticado for cliente, mostrar seu histórico de empréstimos
+ - se usuário autenticado for gerente, mostrar histórico de empréstimos completo
+get logout: envia logout (redireciona p/ login) (CLIENTE / GERENTE)
+
+CRUD Pessoas
+------------
+get profile: retorna página de perfil do usuário autenticado (CLIENTE / GERENTE)
+post profile: envia form de atualização do usuário autenticado (CLIENTE / GERENTE)
+delete profile: deleta usuário autenticado (CLIENTE / GERENTE)
+ - Ao menos um gerente deve estar cadastrado!
+
+get register: retorna página de cadastro de **cliente/gerente** (GERENTE)
+post register: envia form de cadastro de **cliente/gerente** (GERENTE)
+
+get profiles: retorna página com todos os usuários (GERENTE)
+post profiles/{id}: envia form de atualização do usuário selecionado (GERENTE)
+delete profiles/{id}: deleta usuário selecionado (GERENTE)
+
+CRUD Livros
+-----------
+get cad-livro: retorna página de cadastro de livro (GERENTE)
+post cad-livro: envia form de cadastro de livro (GERENTE)
+ 
+get livros: retorna página com todos os livros (CLIENTE / GERENTE)
+post livros/{id}: envia form de atualização do livro selecionado (GERENTE)
+delete livros/{id}: deleta livro selecionado (GERENTE)
+
+CRUD Emprestimos
+----------------
+get cad-emprestimo: retorna página de cadastro de empréstimo (CLIENTE / GERENTE)
+ - se usuário autenticado for cliente, ocultar campo "id_pessoa"
+post cad-emprestimo: envia form de cadastro de empréstimo (CLIENTE / GERENTE)
+ - se usuário autenticado for cliente, só pode emprestar livros pra ele mesmo
+
+get emprestimos: retorna página com todos os empréstimos (GERENTE)
+post emprestimos/{id}: envia form de atualização do empréstimo selecionado (GERENTE)
+delete emprestimos/{id}: deleta empréstimo selecionado (GERENTE)
