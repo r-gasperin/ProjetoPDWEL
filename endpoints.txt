@@ -15,7 +15,7 @@ USUÁRIO AUTENTICADO (não autenticado --> login)
 ===================
 get /: retorna homepage (CLIENTE / GERENTE)
  - se usuário autenticado for cliente, mostrar seu histórico de empréstimos
- - se usuário autenticado for gerente, mostrar histórico de empréstimos completo
+ - se usuário autenticado for gerente, chamar "emprestimos"
 get logout: envia logout (redireciona p/ login) (CLIENTE / GERENTE)
 
 CRUD Pessoas
