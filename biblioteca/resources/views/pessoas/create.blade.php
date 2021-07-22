@@ -25,7 +25,7 @@
 		<input type="text" name="ddd"  maxlength="2"/><br/>
 		
 		<label>Telefone</label><br/>
-		<input type="text" name="telefone" maxlength="10" /><br/>
+		<input type="text" name="telefone" maxlength="9" /><br/>
 		
 		<button>Salvar</button>
 	

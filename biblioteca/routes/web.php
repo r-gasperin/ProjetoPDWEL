@@ -34,4 +34,8 @@ Route::post('/livro/editar/{id}', 'LivrosController@update')->name('editar_livro
 Route::get('/livro/deletar/{id}', 'LivrosController@delete');
 Route::post('/livro/deletar/{id}', 'LivrosController@destroy')->name('deletar_livro');
 
+Route::get('/emprestimos/novo', 'EmprestimosController@create');
+Route::post('/emprestimos/novo', 'EmprestimosController@store')->name('registrar_emprestimo');
+
+
 
