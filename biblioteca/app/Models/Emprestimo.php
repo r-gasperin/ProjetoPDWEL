@@ -16,4 +16,12 @@ class Emprestimo extends Model
     			'data_fim', 
     			'data_devolucao', 
     			'devolvido'];
+    
+    public function pessoas(){
+    	return $this->belongsTo('App\Models\Pessoa','id_pessoa','id');
+    }
+    
+    public function livros(){
+    	return $this->belongsTo('App\Models\Livro','id_livro','id');
+    }
 }

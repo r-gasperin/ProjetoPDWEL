@@ -9,8 +9,11 @@
 <body>
 	<form action="{{ route('registrar_livro') }}" method="POST">
 		@csrf
-		<label>Nome</label><br/>
+		<label>Título</label><br/>
 		<input type="text" name="nome" /><br/>
+		
+		<label>Descrição</label><br/>
+		<input type="text" name="descricao" /><br/>
 		
 		<label>Editora</label><br/>
 		<input type="text" name="editora" /><br/>
@@ -18,13 +21,16 @@
 		<label>Autor</label><br/>
 		<input type="text" name="autor" /><br/>
 		
+		<label>ISBN</label><br/>
+		<input type="text" name="isbn" /><br/>
+		
 		<label>Preço</label><br/>
 		<input type="text" name="preco" /><br/>
 		
 		<label>Ano</label><br/>
-		<input type="text" name="ano" /><br/>
-		
-		<button>Salvar</button>
+		<input type="text" name="ano" /><br/><br/>
+		<a href="/livros/listar">Voltar</a>
+		<button onclick="return confirm('Realmente deseja salvar esse registro?')">Salvar</button>
 	
 	</form>
 </body>

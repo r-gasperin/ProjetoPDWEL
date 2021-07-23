@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('/pessoas/novo', 'PessoasController@create');
 Route::post('/pessoas/novo', 'PessoasController@store')->name('registrar_pessoa');
-Route::get('/pessoa/{id}', 'PessoasController@show');
+Route::get('/pessoas/listar', 'PessoasController@show');
 Route::get('/pessoa/editar/{id}', 'PessoasController@edit');
 Route::post('/pessoa/editar/{id}', 'PessoasController@update')->name('editar_pessoa');
 Route::get('/pessoa/deletar/{id}', 'PessoasController@delete');
@@ -28,7 +28,7 @@ Route::post('/pessoa/deletar/{id}', 'PessoasController@destroy')->name('deletar_
 
 Route::get('/livros/novo', 'LivrosController@create');
 Route::post('/livros/novo', 'LivrosController@store')->name('registrar_livro');
-Route::get('/livro/{id}', 'LivrosController@show');
+Route::get('/livros/listar', 'LivrosController@show');
 Route::get('/livro/editar/{id}', 'LivrosController@edit');
 Route::post('/livro/editar/{id}', 'LivrosController@update')->name('editar_livro');
 Route::get('/livro/deletar/{id}', 'LivrosController@delete');
@@ -36,6 +36,8 @@ Route::post('/livro/deletar/{id}', 'LivrosController@destroy')->name('deletar_li
 
 Route::get('/emprestimos/novo', 'EmprestimosController@create');
 Route::post('/emprestimos/novo', 'EmprestimosController@store')->name('registrar_emprestimo');
+Route::get('/emprestimos/listar', 'EmprestimosController@show');
+Route::put('/emprestimos/devolver/{id}', 'EmprestimosController@devolver');
 
 
 

@@ -9,9 +9,10 @@
 <body>
 	<form action="{{ route('deletar_livro', ['id' => $livro->id]) }}" method="POST">
 		@csrf
-		<label>Tem certeza que deseja excluir esse registro?</label><br/>
+		<label>Registro a ser excluído</label><br/>
 		<input type="text" name="nome" value="{{$livro->nome}}" readonly="readonly" /><br/>
-		<button>Sim</button>
+		<a href="/livros/listar">Voltar</a>
+		<button onclick="return confirm('Realmente deseja excluir esse registro?')">Confirmar</button>
 	</form>
 </body>
 </html>

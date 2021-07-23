@@ -25,8 +25,8 @@
 	           	<option value="{{$l->id}}"> {{$l->nome}}</option>
 	        @endforeach
         </select><br/>
-		
-		<button>Salvar</button>
+		<a href="/emprestimos/listar">Voltar</a>
+		<button onclick="return confirm('Realmente deseja salvar esse registro?')">Salvar</button>
 	
 	</form>
 </body>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pessoa;
+use Redirect;
 
 class PessoasController extends Controller
 {
@@ -23,12 +24,12 @@ class PessoasController extends Controller
 			'telefone' => $request['telefone']
 		]);
 		
-		return "Cadastro realizado com sucesso!!!";
+		return Redirect::to('/pessoas/listar');
 	}
 	
-	public function show ($id){
-		$pessoa = Pessoa::findOrFail($id);
-		return view('pessoas.show', ['pessoa' => $pessoa]);	
+	public function show (){
+		$pessoas = Pessoa::get();
+		return view('pessoas.show', ['pessoas' => $pessoas]);	
 	}
 	
 	public function edit($id){
@@ -48,7 +49,7 @@ class PessoasController extends Controller
 				'telefone' => $request['telefone']
 				]);
 	
-		return "Edição realizada com sucesso!!!";
+		return Redirect::to('/pessoas/listar');
 	}
 	
 	public function delete ($id){
@@ -59,7 +60,7 @@ class PessoasController extends Controller
 	public function destroy ($id){
 		$pessoa = Pessoa::findOrFail($id);
 		$pessoa-> delete();
-		return "Pessoa Excluída com sucesso!!!";		
+		return Redirect::to('/pessoas/listar');		
 	}
 	
 }

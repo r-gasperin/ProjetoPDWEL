@@ -18,7 +18,7 @@
 		<label>E-Mail</label><br/>
 		<input type="email" name="email" value="{{$pessoa->email}}" maxlength="150" /><br/>
 		
-		<label>EndereÃ§o</label><br/>
+		<label>Endereço</label><br/>
 		<input type="text" name="endereco" value="{{$pessoa->endereco}}"  maxlength="150"/><br/>
 		
 		<label>DDD</label><br/>
@@ -26,8 +26,8 @@
 		
 		<label>Telefone</label><br/>
 		<input type="text" name="telefone" value="{{$pessoa->telefone}}" maxlength="10" /><br/>
-		
-		<button>Editar</button>
+		<a href="/pessoas/listar">Voltar</a>
+		<button onclick="return confirm('Realmente deseja editar esse registro?')">Editar</button>
 	</form>
 </body>
 </html>

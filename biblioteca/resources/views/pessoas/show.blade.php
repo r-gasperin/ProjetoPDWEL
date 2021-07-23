@@ -7,22 +7,35 @@
 	<title>Cadastro de Pessoa</title>
 </head>
 <body>
-		<label>Nome</label><br/>
-		<input type="text" name="nome" value="{{$pessoa->nome}}" maxlength="100" /><br/>
-		
-		<label>CPF</label><br/>
-		<input type="text" name="cpf" value="{{$pessoa->cpf}}" maxlength="15"/><br/>
-		
-		<label>E-Mail</label><br/>
-		<input type="email" name="email" value="{{$pessoa->email}}" maxlength="150" /><br/>
-		
-		<label>Endereço</label><br/>
-		<input type="text" name="endereco" value="{{$pessoa->endereco}}"  maxlength="150"/><br/>
-		
-		<label>DDD</label><br/>
-		<input type="text" name="ddd" value="{{$pessoa->ddd}}" maxlength="2"/><br/>
-		
-		<label>Telefone</label><br/>
-		<input type="text" name="telefone" value="{{$pessoa->telefone}}" maxlength="10" /><br/>
+	<a href="/pessoas/novo">Novo</a>
+	<table class="table table-bordered" border="1">
+		<thead>
+			<tr>
+				<th scope="col">Nome</th>
+				<th scope="col">CPF</th>
+				<th scope="col">E-Mail</th>
+				<th scope="col">Endereço</th>
+				<th scope="col">DDD</th>
+				<th scope="col">Telefone</th>
+				<th scope="col">#</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach( $pessoas as $obj)
+			<tr>
+				<td>{{ $obj->nome }}</td>
+				<td>{{ $obj->cpf }}</td>
+				<td>{{ $obj->email }}</td>
+				<td>{{ $obj->endereco }}</td>
+				<td>{{ $obj->ddd }}</td>
+				<td>{{ $obj->telefone }}</td>
+				<td>
+					<a href="/pessoa/editar/{{ $obj->id }}">Editar</a>
+					<a href="/pessoa/deletar/{{ $obj->id }}">Excluir</a>	
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
 </body>
 </html>

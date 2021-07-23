@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livro;
+use Redirect;
 
 class LivrosController extends Controller
 {
@@ -19,15 +20,17 @@ class LivrosController extends Controller
 		'editora' => $request['editora'],
 		'autor' => $request['autor'],
 		'preco' => $request['preco'],
+		'isbn' => $request['isbn'],
+		'descricao' => $request['descricao'],
 		'ano' => $request['ano']
 		]);
 	
-		return "Cadastro realizado com sucesso!!!";
+		return Redirect::to('/livros/listar');
 	}
 	
-	public function show ($id){
-		$livro = Livro::findOrFail($id);
-		return view('livros.show', ['livro' => $livro]);
+	public function show (){
+		$livros = Livro::get();
+		return view('livros.show', ['livros' => $livros]);
 	}
 	
 	public function edit ($id){
@@ -42,10 +45,12 @@ class LivrosController extends Controller
 			'editora' => $request['editora'],
 			'autor' => $request['autor'],
 			'preco' => $request['preco'],
+			'isbn' => $request['isbn'],
+			'descricao' => $request['descricao'],
 			'ano' => $request['ano']
 			]);
 		
-		return "Edição realizada com sucesso!!!";
+		return Redirect::to('/livros/listar');
 		
 	}
 	
@@ -57,7 +62,7 @@ class LivrosController extends Controller
 	public function destroy ($id){
 		$livro = Livro::findOrFail($id);
 		$livro-> delete();
-		return "Livro Excluído com sucesso!!!";		
+		return Redirect::to('/livros/listar');	
 	}
 	
 }

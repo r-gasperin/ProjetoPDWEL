@@ -20,6 +20,8 @@ class CreateLivrosTable extends Migration
             $table->string('autor');
             $table->decimal('preco');
             $table->integer('ano');
+            $table->string('isbn');
+            $table->string('descricao');
             $table->timestamps();
         });
     }

@@ -26,8 +26,8 @@
 		
 		<label>Telefone</label><br/>
 		<input type="text" name="telefone" maxlength="9" /><br/>
-		
-		<button>Salvar</button>
+		<a href="/pessoas/listar">Voltar</a>
+		<button onclick="return confirm('Realmente deseja salvar esse registro?')">Salvar</button>
 	
 	</form>
 </body>
