@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\EmprestimosController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\LivrosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,31 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [EmprestimosController::class, 'show'])->name('home');
 
-Route::get('/pessoas/novo', 'PessoasController@create');
-Route::post('/pessoas/novo', 'PessoasController@store')->name('registrar_pessoa');
-Route::get('/pessoas/listar', 'PessoasController@show');
-Route::get('/pessoa/editar/{id}', 'PessoasController@edit');
-Route::post('/pessoa/editar/{id}', 'PessoasController@update')->name('editar_pessoa');
-Route::get('/pessoa/deletar/{id}', 'PessoasController@delete');
-Route::post('/pessoa/deletar/{id}', 'PessoasController@destroy')->name('deletar_pessoa');
+Route::get('/emprestimos/novo', [EmprestimosController::class, 'create']);
+Route::post('/emprestimos/novo', [EmprestimosController::class, 'store'])->name('registrar_emprestimo');
+Route::get('/emprestimos/listar', [EmprestimosController::class, 'show'])->name('emprestimos');
+Route::put('/emprestimos/devolver/{id}', [EmprestimosController::class, 'devolver']);
 
+Route::get('/clientes/listar', [ClienteController::class, 'show'])->name('clientes.get');
+Route::post('/clientes/editar', [ClienteController::class, 'update'])->name('cliente.post');
+Route::get('/clientes/deletar', [ClienteController::class, 'delete'])->name('cliente.delete');
+Route::get('/clientes/novo', [ClienteController::class, 'create'])->name('add-cliente.get');
+Route::post('/clientes/novo', [ClienteController::class, 'store'])->name('add-cliente.post');
 
-Route::get('/livros/novo', 'LivrosController@create');
-Route::post('/livros/novo', 'LivrosController@store')->name('registrar_livro');
-Route::get('/livros/listar', 'LivrosController@show');
-Route::get('/livro/editar/{id}', 'LivrosController@edit');
-Route::post('/livro/editar/{id}', 'LivrosController@update')->name('editar_livro');
-Route::get('/livro/deletar/{id}', 'LivrosController@delete');
-Route::post('/livro/deletar/{id}', 'LivrosController@destroy')->name('deletar_livro');
-
-Route::get('/emprestimos/novo', 'EmprestimosController@create');
-Route::post('/emprestimos/novo', 'EmprestimosController@store')->name('registrar_emprestimo');
-Route::get('/emprestimos/listar', 'EmprestimosController@show');
-Route::put('/emprestimos/devolver/{id}', 'EmprestimosController@devolver');
-
-
-
+Route::get('/livros/novo', [LivrosController::class, 'create']);
+Route::post('/livros/novo', [LivrosController::class, 'store'])->name('registrar_livro');
+Route::get('/livros/listar', [LivrosController::class, 'show'])->name('livros');
+Route::get('/livro/editar/{id}', [LivrosController::class, 'edit']);
+Route::post('/livro/editar/{id}', [LivrosController::class, 'update'])->name('editar_livro');
+Route::get('/livro/deletar/{id}', [LivrosController::class, 'delete']);
+Route::post('/livro/deletar/{id}', [LivrosController::class, 'destroy'])->name('deletar_livro');

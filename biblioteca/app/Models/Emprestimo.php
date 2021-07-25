@@ -10,7 +10,7 @@ class Emprestimo extends Model
     use HasFactory;
     
     protected $fillable =[
-    			'id_pessoa', 
+    			'id_cliente', 
     			'id_livro', 
     			'data_incio',
     			'data_fim', 
@@ -18,7 +18,7 @@ class Emprestimo extends Model
     			'devolvido'];
     
     public function pessoas(){
-    	return $this->belongsTo('App\Models\Pessoa','id_pessoa','id');
+    	return $this->belongsTo('App\Models\Cliente','id_cliente','id');
     }
     
     public function livros(){

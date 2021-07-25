@@ -10,19 +10,21 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Redirect;
 
-class EmprestimosController extends Controller
-{
-	public function create(){
+class EmprestimosController extends Controller {
+
+	public function create() {
+
 		$pessoas = Pessoa::get();
 		$livros = Livro::get();
-		return view('emprestimos.create', ['pessoas' => $pessoas, 'livros' => $livros]);
+		return view('pages.emprestimos.create', ['pessoas' => $pessoas, 'livros' => $livros]);
 	}
 	
-	public function store(Request $request){
+	public function store(Request $request) {
+
 		$qtdLivrosEmprestados = DB::select('select count(1) resultado from emprestimos where devolvido = 0 and id_pessoa = ?', [ $request['pessoa']]);
 		if ($qtdLivrosEmprestados[0]->resultado >= 3) {
 			return "Usuario já possui o limite de livros permitidos.";
-		}else{
+		} else {
 			$emprestimo = new Emprestimo;
 			$emprestimo = $emprestimo -> create([
 				'id_pessoa' => $request['pessoa'],
@@ -35,12 +37,14 @@ class EmprestimosController extends Controller
 		return "Cadastro realizado com sucesso!!!";
 	}
 	
-	public function show (Request $request){
+	public function show (Request $request) {
+
 		$emprestimos = Emprestimo::with('pessoas')->with('livros')->get();
-		return view('emprestimos.show', ['emprestimos' => $emprestimos]);
+		return view('pages.emprestimos.show', ['emprestimos' => $emprestimos]);
 	}
 	
-	public function devolver($id){
+	public function devolver($id) {
+		
 		$emprestimo = Emprestimo::findOrFail( $id );
 		$emprestimo = $emprestimo -> update([
 				'data_devolucao' => date('Y-m-d'),

@@ -15,8 +15,8 @@ class CreateEmprestimosTable extends Migration
     {
         Schema::create('emprestimos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_pessoa')->unsigned();
-            $table->foreign('id_pessoa')->references('id')->on('pessoas');
+            $table->bigInteger('id_cliente')->unsigned();
+            $table->foreign('id_cliente')->references('id')->on('clientes');
             $table->bigInteger('id_livro')->unsigned();
             $table->foreign('id_livro')->references('id')->on('livros');
             $table->date('data_incio');
