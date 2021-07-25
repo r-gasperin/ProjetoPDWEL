@@ -29,10 +29,8 @@ Route::get('/clientes/deletar', [ClienteController::class, 'delete'])->name('cli
 Route::get('/clientes/novo', [ClienteController::class, 'create'])->name('add-cliente.get');
 Route::post('/clientes/novo', [ClienteController::class, 'store'])->name('add-cliente.post');
 
-Route::get('/livros/novo', [LivrosController::class, 'create']);
-Route::post('/livros/novo', [LivrosController::class, 'store'])->name('registrar_livro');
-Route::get('/livros/listar', [LivrosController::class, 'show'])->name('livros');
-Route::get('/livro/editar/{id}', [LivrosController::class, 'edit']);
-Route::post('/livro/editar/{id}', [LivrosController::class, 'update'])->name('editar_livro');
-Route::get('/livro/deletar/{id}', [LivrosController::class, 'delete']);
-Route::post('/livro/deletar/{id}', [LivrosController::class, 'destroy'])->name('deletar_livro');
+Route::get('/livros/listar', [LivrosController::class, 'show'])->name('livros.get');
+Route::post('/livros/editar', [LivrosController::class, 'update'])->name('livro.post');
+Route::get('/livros/deletar', [LivrosController::class, 'delete'])->name('livro.delete');
+Route::get('/livros/novo', [LivrosController::class, 'create'])->name('add-livro.get');
+Route::post('/livros/novo', [LivrosController::class, 'store'])->name('add-livro.post');

@@ -1,37 +1,100 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewimport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Cadastro de Livro</title>
-</head>
-<body>
-	<form action="{{ route('registrar_livro') }}" method="POST">
+@extends('layouts.app')
+
+@section('page_title', 'Adicionar livro')
+
+@section('content')
+
+	<table align="center">
+		<thead>
+			<tr>
+				<th scope="col">Título</th>
+				<th scope="col">Autor</th>
+				<th scope="col">Editora</th>
+				<th scope="col">Ano</th>
+				<th scope="col">ISBN</th>
+			</tr>
+			<tr>
+				<th scope="col" colspan="2">Descrição</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+	</table>
+	<br>
+
+	<form action="{{ route('add-livro.post') }}" method="POST" id="add">
 		@csrf
-		<label>Título</label><br/>
-		<input type="text" name="nome" /><br/>
-		
-		<label>Descrição</label><br/>
-		<input type="text" name="descricao" /><br/>
-		
-		<label>Editora</label><br/>
-		<input type="text" name="editora" /><br/>
-		
-		<label>Autor</label><br/>
-		<input type="text" name="autor" /><br/>
-		
-		<label>ISBN</label><br/>
-		<input type="text" name="isbn" /><br/>
-		
-		<label>Preço</label><br/>
-		<input type="text" name="preco" /><br/>
-		
-		<label>Ano</label><br/>
-		<input type="text" name="ano" /><br/><br/>
-		<a href="/livros/listar">Voltar</a>
-		<button onclick="return confirm('Realmente deseja salvar esse registro?')">Salvar</button>
-	
 	</form>
-</body>
-</html>
+
+	<table align="center">
+		<tbody>
+			<tr>
+				<td>
+					<input type="text" name="titulo" value="{{ old('titulo') }}" form="add"/>
+					@if ($errors->has('titulo'))
+						<br>
+						<small class="error">
+							{{ $errors->first('titulo') }}
+						</small>
+					@endif
+				</td>
+				<td>
+					<input type="text" name="autor" value="{{ old('autor') }}" form="add"/>
+					@if ($errors->has('autor'))
+						<br>
+						<small class="error">
+							{{ $errors->first('autor') }}
+						</small>
+					@endif
+				</td>
+				<td>
+					<input type="text" name="editora" value="{{ old('editora') }}" form="add"/>
+					@if ($errors->has('editora'))
+						<br>
+						<small class="error">
+							{{ $errors->first('editora') }}
+						</small>
+					@endif
+				</td>
+				<td>
+					<input type="number" name="ano" value="{{ old('ano') }}" form="add"/>
+					@if ($errors->has('ano'))
+						<br>
+						<small class="error">
+							{{ $errors->first('ano') }}
+						</small>
+					@endif
+				</td>
+				<td>
+					<input type="text" name="isbn" value="{{ old('isbn') }}" form="add"/>
+					@if ($errors->has('isbn'))
+						<br>
+						<small class="error">
+							{{ $errors->first('isbn') }}
+						</small>
+					@endif
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="text" name="descricao" value="{{ old('descricao') }}" form="add" class="double"/>
+					@if ($errors->has('descricao'))
+						<br>
+						<small class="error">
+							{{ $errors->first('descricao') }}
+						</small>
+					@endif
+				</td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="{{ route('livros.get') }}">Voltar</a>
+					<button onclick="return confirm('Realmente deseja salvar esse registro?')" form="add">Add</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+
+@endsection

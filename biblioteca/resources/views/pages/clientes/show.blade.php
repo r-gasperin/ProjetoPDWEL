@@ -8,23 +8,28 @@
 
 @section('content')
 
-	<table align="center">
-		<thead>
-			<tr>
-				<th scope="col">Id</th>
-				<th scope="col">Nome</th>
-				<th scope="col">E-mail</th>
-				<th scope="col">RG</th>
-				<th scope="col">DDD</th>
-			</tr>
-			<tr>
-				<th scope="col">Telefone</th>
-				<th scope="col" colspan="2">Endereço</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-	</table>
+	@if (count($clientes) == 0)
+		<!-- Empty state -->
+		<h2 class="empty">Nenhum cliente cadastrado</h2>
+	@else
+		<table align="center">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Nome</th>
+					<th scope="col">E-mail</th>
+					<th scope="col">RG</th>
+					<th scope="col">DDD</th>
+				</tr>
+				<tr>
+					<th scope="col">Telefone</th>
+					<th scope="col" colspan="2">Endereço</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	@endif
 	<br>
 
 	@foreach($clientes as $obj)

@@ -4,9 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livro;
-use Redirect;
 
 class LivrosController extends Controller {
+	
+	public function show() {
+
+		$livros = Livro::get();
+		return view('pages.livros.show', compact('livros'));
+	}
+	
+	public function update(Request $request) {
+
+        $this->validate($request, [
+			'titulo' => 'required|max:100',
+			'autor' => 'required|max:50',
+			'editora' => 'nullable|max:50',
+			'ano' => 'nullable|digits:4|integer',
+			'descricao' => 'nullable|max:255'
+        ]);
+
+		$livro = Livro::findOrFail($request['id']);
+		$livro = $livro -> update([
+			'titulo' => $request['titulo'],
+			'autor' => $request['autor'],
+			'editora' => $request['editora'],
+			'ano' => $request['ano'],
+			'descricao' => $request['descricao']
+		]);
+
+		return redirect()->route('livros.get');
+	}
+	
+	public function delete(Request $request) {
+		
+		$livro = Livro::findOrFail($request['id']);
+		$livro-> delete();
+		return redirect()->route('livros.get');
+	}
 
 	public function create() {
     	return view('pages.livros.create');
@@ -14,59 +48,25 @@ class LivrosController extends Controller {
 	
 	public function store(Request $request) {
 
-		//dd($request->all());
+        $this->validate($request, [
+			'titulo' => 'required|max:100',
+			'autor' => 'required|max:50',
+			'editora' => 'nullable|max:50',
+			'ano' => 'nullable|digits:4|integer',
+			'isbn' => 'required|unique:livros|min:13|max:13',
+			'descricao' => 'nullable|max:255'
+        ]);
+
 		$livro = new Livro;
 		$livro = $livro -> create([
-		'nome' => $request['nome'],
-		'editora' => $request['editora'],
-		'autor' => $request['autor'],
-		'preco' => $request['preco'],
-		'isbn' => $request['isbn'],
-		'descricao' => $request['descricao'],
-		'ano' => $request['ano']
-		]);
-	
-		return Redirect::to('/livros/listar');
-	}
-	
-	public function show () {
-
-		$livros = Livro::get();
-		return view('pages.livros.show', ['livros' => $livros]);
-	}
-	
-	public function edit ($id) {
-
-		$livro = Livro::findOrFail($id);
-		return view('pages.livros.edit', ['livro' => $livro]);
-	}
-	
-	public function update(Request $request, $id) {
-
-		$livro = Livro::findOrFail($id);
-		$livro = $livro -> update([
-			'nome' => $request['nome'],
-			'editora' => $request['editora'],
+			'titulo' => $request['titulo'],
 			'autor' => $request['autor'],
-			'preco' => $request['preco'],
+			'editora' => $request['editora'],
+			'ano' => $request['ano'],
 			'isbn' => $request['isbn'],
-			'descricao' => $request['descricao'],
-			'ano' => $request['ano']
-			]);
+			'descricao' => $request['descricao']
+		]);
 		
-		return Redirect::to('/livros/listar');
-	}
-	
-	public function delete ($id) {
-
-		$livro = Livro::findOrFail($id);
-		return view('pages.livros.delete', ['livro' => $livro]);
-	}
-	
-	public function destroy ($id) {
-		
-		$livro = Livro::findOrFail($id);
-		$livro-> delete();
-		return Redirect::to('/livros/listar');	
+		return redirect()->route('livros.get');
 	}
 }

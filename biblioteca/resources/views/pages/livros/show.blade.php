@@ -1,44 +1,115 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewimport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Listagem de Livros</title>
-</head>
-<body>
-	<a href="/livros/novo">Novo</a>
-	<table class="table table-bordered" border="1">
-		<thead>
-			<tr>
-				<th scope="col">Título</th>
-				<th scope="col">Descrição</th>
-				<th scope="col">Editora</th>
-				<th scope="col">Autor</th>
-				<th scope="col">ISBN</th>
-				<th scope="col">Preço</th>
-				<th scope="col">Ano</th>
-				<th scope="col">#</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach( $livros as $obj)
-			<tr>
-				<td>{{ $obj->nome }}</td>
-				<td>{{ $obj->descricao }}</td>
-				<td>{{ $obj->editora }}</td>
-				<td>{{ $obj->autor }}</td>
-				<td>{{ $obj->isbn }}</td>
-				<td>{{ $obj->preco }}</td>
-				<td>{{ $obj->ano }}</td>
-				<td>
-					<a href="/livro/editar/{{ $obj->id }}">Editar</a> <br/>
-					<a href="/livro/deletar/{{ $obj->id }}">Excluir</a>
-				</td>
-				
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('page_title', 'Livros')
+
+@section('add_link')
+	<a href="{{ route('add-livro.get') }}" class="add">Add</a>
+@endsection
+
+@section('content')
+
+	@if (count($livros) == 0)
+		<!-- Empty state -->
+		<h2 class="empty">Nenhum livro cadastrado</h2>
+	@else
+		<table align="center">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Título</th>
+					<th scope="col">Autor</th>
+					<th scope="col">Editora</th>
+					<th scope="col">Ano</th>
+				</tr>
+				<tr>
+					<th scope="col">ISBN</th>
+					<th scope="col" colspan="2">Descrição</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	@endif
+	<br>
+
+	@foreach($livros as $obj)
+
+		<form action="{{ route('livro.post') }}" method="POST" id="atualizar{{ $obj->id }}">
+			@csrf
+		</form>
+
+		<form action="{{ route('livro.delete') }}" method="GET" id="deletar{{ $obj->id }}">
+			@csrf
+		</form>
+
+		<table align="center">
+			<tbody>
+				<tr>
+					<td>
+						<input type="text" value="{{ $obj->id }}" disabled/>
+						<input type="hidden" name="id" value="{{ $obj->id }}" form="atualizar{{ $obj->id }}"/>
+						<input type="hidden" name="id" value="{{ $obj->id }}" form="deletar{{ $obj->id }}"/>
+					</td>
+					<td>
+						<input type="text" name="titulo" value="{{ $obj->titulo }}" form="atualizar{{ $obj->id }}"/>
+						@if ($errors->has('titulo'))
+							<br>
+							<small class="error">
+								{{ $errors->first('titulo') }}
+							</small>
+						@endif
+					</td>
+					<td>
+						<input type="text" name="autor" value="{{ $obj->autor }}" form="atualizar{{ $obj->id }}"/>
+						@if ($errors->has('autor'))
+							<br>
+							<small class="error">
+								{{ $errors->first('autor') }}
+							</small>
+						@endif
+					</td>
+					<td>
+						<input type="text" name="editora" value="{{ $obj->editora }}" form="atualizar{{ $obj->id }}"/>
+						@if ($errors->has('editora'))
+							<br>
+							<small class="error">
+								{{ $errors->first('editora') }}
+							</small>
+						@endif
+					</td>
+					<td>
+						<input type="number" name="ano" value="{{ $obj->ano }}" form="atualizar{{ $obj->id }}"/>
+						@if ($errors->has('ano'))
+							<br>
+							<small class="error">
+								{{ $errors->first('ano') }}
+							</small>
+						@endif
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" value="{{ $obj->isbn }}" disabled/>
+					</td>
+					<td colspan="2">
+						<input type="text" name="descricao" value="{{ $obj->descricao }}" form="atualizar{{ $obj->id }}" class="double"/>
+						@if ($errors->has('descricao'))
+							<br>
+							<small class="error">
+								{{ $errors->first('descricao') }}
+							</small>
+						@endif
+					</td>
+					<td></td>
+					<td>
+						<button onclick="return confirm('Realmente deseja excluir esse registro?')" form="deletar{{ $obj->id }}">Deletar</button>
+						<button onclick="return confirm('Realmente deseja editar esse registro?')" form="atualizar{{ $obj->id }}">Atualizar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+
+	@endforeach
+
+@endsection

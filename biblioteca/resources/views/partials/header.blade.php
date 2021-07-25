@@ -8,7 +8,7 @@
                 <a class="{{ request()->routeIs('clientes.get') ? 'active' : 'header' }}" href="{{ route('clientes.get') }}">Clientes</a>
             </li>
             <li class="header">
-                <a class="{{ request()->routeIs('livros') ? 'active' : 'header' }}" href="{{ route('livros') }}">Livros</a>
+                <a class="{{ request()->routeIs('livros.get') ? 'active' : 'header' }}" href="{{ route('livros.get') }}">Livros</a>
             </li>
         </ul>
     </div>
