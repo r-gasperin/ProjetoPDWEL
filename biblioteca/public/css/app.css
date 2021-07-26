@@ -118,7 +118,7 @@ th, td {
     padding: 10px;
 }
 
-input {
+input, select {
     width: 90%;
 }
 

@@ -2,7 +2,7 @@
     <div>
         <ul class="header">
             <li class="header">
-                <a class="{{ request()->routeIs('emprestimos') ? 'active' : 'header' }}" href="{{ route('emprestimos') }}">Home</a>
+                <a class="{{ request()->routeIs('home') ? 'active' : (request()->routeIs('emprestimos.get') ? 'active' : 'header') }}" href="{{ route('emprestimos.get') }}">Home</a>
             </li>
             <li class="header">
                 <a class="{{ request()->routeIs('clientes.get') ? 'active' : 'header' }}" href="{{ route('clientes.get') }}">Clientes</a>

@@ -1,51 +1,105 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewimport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Listar Emprestimos</title>
-</head>
-<body>
-	<a href="/emprestimos/novo">Novo</a>
-	<table class="table table-bordered" border="1">
-		<thead>
-			<tr>
-				<th scope="col">Pessoa</th>
-				<th scope="col">Livro</th>
-				<th scope="col">Data Inicio Emprestimo</th>
-				<th scope="col">Data Fim Emprestimo</th>
-				<th scope="col">Data Devolução</th>
-				<th scope="col">Ação</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach( $emprestimos as $e)
-			<tr>
-				<td>{{ $e->pessoas->nome }}</td>
-				<td>{{ $e->livros->nome }}</td>
-				<td>{{ date( 'd/m/Y' , strtotime($e->data_incio))}}</td>
-				<td>{{ date( 'd/m/Y' , strtotime($e->data_fim))}}</td>
-				@if ($e->data_devolucao != null)
-					<td>{{ date( 'd/m/Y' , strtotime($e->data_devolucao))}}</td>
-				@else
-					<td>{{ $e->data_devolucao }}</td>
-				@endif
-				@if ($e->devolvido == 0)
+@extends('layouts.app')
+
+@section('page_title', 'Empréstimos')
+
+@section('add_link')
+	<a href="{{ route('add-emprestimo.get') }}" class="add">Add</a>
+@endsection
+
+@section('content')
+
+	@if (count($emprestimos) == 0)
+		<!-- Empty state -->
+		<h2 class="empty">Nenhum empréstimo cadastrado</h2>
+	@else
+		<table align="center">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Cliente</th>
+					<th scope="col">Livro</th>
+					<th scope="col">Data início</th>
+					<th scope="col">Data fim</th>
+				</tr>
+				<tr>
+					<th scope="col">Data devolução</th>
+					<th scope="col">Devolvido</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+		</table>
+	@endif
+	<br>
+
+	@foreach($emprestimos as $obj)
+
+		<form action="{{ route('emprestimo.post') }}" method="POST" id="atualizar{{ $obj->id }}">
+			@csrf
+		</form>
+
+		<form action="{{ route('emprestimo.delete') }}" method="GET" id="deletar{{ $obj->id }}">
+			@csrf
+		</form>
+
+		<table align="center">
+			<tbody>
+				<tr>
 					<td>
-						<form action="devolver/{{ $e->id }}" method="post">
-                        	@csrf
-                            @method('put')
-                            <button class="btn btn-danger">Devolver</button>
-                        </form>
+						<input type="text" value="{{ $obj->id }}" disabled/>
+						<input type="hidden" name="id" value="{{ $obj->id }}" form="atualizar{{ $obj->id }}"/>
+						<input type="hidden" name="id" value="{{ $obj->id }}" form="deletar{{ $obj->id }}"/>
 					</td>
-				@else
-					<td>Devolvido</td>
-				@endif
-				
-			</tr>
-			@endforeach
-		</tbody>
-	</table>
-</body>
-</html>
+					<td>
+						<input type="text" value="[{{ $obj->clientes->id }}] {{ $obj->clientes->nome }}" disabled/>
+					</td>
+					<td>
+						<input type="text" value="[{{ $obj->livros->id }}] {{ $obj->livros->titulo }}" disabled/>
+					</td>
+					<td>
+						<input type="text" value="{{ date('d/m/Y', strtotime($obj->data_inicio)) }}" disabled/>
+					</td>
+					<td>
+						<input type="text" value="{{ date('d/m/Y', strtotime($obj->data_fim)) }}" disabled/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						@if ($obj->data_devolucao != null)
+							<input type="text" value="{{ date('d/m/Y', strtotime($obj->data_devolucao)) }}" disabled/>
+						@else
+							<input type="text" value="Aguardando..." disabled/>
+						@endif
+					</td>
+					<td>
+						<select name="devolvido" form="atualizar{{ $obj->id }}">
+							@if ($obj->devolvido == 0)
+								<option value="0" selected>Não</option>
+								<option value="1">Sim</option>
+							@else
+								<option value="0">Não</option>
+								<option value="1" selected>Sim</option>
+							@endif
+						</select>
+						@if ($errors->has('devolvido'))
+							<br>
+							<small class="error">
+								{{ $errors->first('devolvido') }}
+							</small>
+						@endif
+					</td>
+					<td></td>
+					<td></td>
+					<td>
+						<button onclick="return confirm('Realmente deseja excluir esse registro?')" form="deletar{{ $obj->id }}">Deletar</button>
+						<button onclick="return confirm('Realmente deseja editar esse registro?')" form="atualizar{{ $obj->id }}">Atualizar</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+
+	@endforeach
+
+@endsection

@@ -3,54 +3,93 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Emprestimo;
-use App\Models\Pessoa;
-use App\Models\Livro;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Redirect;
+use App\Models\Emprestimo;
+use App\Models\Cliente;
+use App\Models\Livro;
 
 class EmprestimosController extends Controller {
+	
+	public function show() {
+
+		$emprestimos = Emprestimo::with('clientes')->with('livros')->get();
+		return view('pages.emprestimos.show', compact('emprestimos'));
+	}
+	
+	public function update(Request $request) {
+
+		$hoje = null;
+		$devolvido = false;
+		$msg = "Empréstimo já está em andamento";
+
+		// Usuario "concluiu" o emprestimo
+		if ($request['devolvido'] == 1) {
+			$hoje = date('Y-m-d');
+			$devolvido = true;
+			$msg = "Empréstimo já está encerrado";
+		}
+
+		// Verifica situacao do emprestimo
+		$query = DB::select('select devolvido from emprestimos where id = ?', [$request['id']]);
+
+		if ($query[0]->devolvido == $request['devolvido']) {
+			return back()->withErrors([
+				'devolvido' => $msg
+			])->withInput();
+		}
+
+		$emprestimo = Emprestimo::findOrFail($request['id']);
+		$emprestimo = $emprestimo -> update([
+			'data_devolucao' => $hoje,
+			'devolvido' => $devolvido
+		]);
+
+		return redirect()->route('emprestimos.get');
+	}
+
+	public function delete(Request $request) {
+		
+		$emprestimo = Emprestimo::findOrFail($request['id']);
+		$emprestimo-> delete();
+		return redirect()->route('emprestimos.get');
+	}
 
 	public function create() {
 
-		$pessoas = Pessoa::get();
+		$clientes = Cliente::get();
 		$livros = Livro::get();
-		return view('pages.emprestimos.create', ['pessoas' => $pessoas, 'livros' => $livros]);
+    	return view('pages.emprestimos.create', compact('clientes', 'livros'));
 	}
 	
 	public function store(Request $request) {
 
-		$qtdLivrosEmprestados = DB::select('select count(1) resultado from emprestimos where devolvido = 0 and id_pessoa = ?', [ $request['pessoa']]);
-		if ($qtdLivrosEmprestados[0]->resultado >= 3) {
-			return "Usuario já possui o limite de livros permitidos.";
-		} else {
-			$emprestimo = new Emprestimo;
-			$emprestimo = $emprestimo -> create([
-				'id_pessoa' => $request['pessoa'],
-				'id_livro' => $request['livro'],
-				'data_incio' => date('Y-m-d'),
-				'data_fim' =>  Carbon::createFromFormat("Y-m-d", date('Y-m-d'))->addDays(14),
-				'devolvido' => false,
-				]);
-		}
-		return "Cadastro realizado com sucesso!!!";
-	}
-	
-	public function show (Request $request) {
+        $this->validate($request, [
+			'cliente' => 'integer|min:1',
+			'livro' => 'integer|min:1'
+        ]);
 
-		$emprestimos = Emprestimo::with('pessoas')->with('livros')->get();
-		return view('pages.emprestimos.show', ['emprestimos' => $emprestimos]);
-	}
-	
-	public function devolver($id) {
+		$query = DB::select(
+			'select count(1) as qtde from emprestimos where id_cliente = ? and devolvido = ?',
+			[$request['cliente'], 0]);
+
+		if ($query[0]->qtde >= 3) {
+			return back()->withErrors([
+				'limite' => 'Cliente já possui o limite de livros permitidos.'
+			])->withInput();
+		}
+
+		$hoje = date('Y-m-d');
+
+		$emprestimo = new Emprestimo;
+		$emprestimo = $emprestimo -> create([
+			'id_cliente' => $request['cliente'],
+			'id_livro' => $request['livro'],
+			'data_inicio' => $hoje,
+			'data_fim' =>  Carbon::createFromFormat("Y-m-d", $hoje)->addDays(14),
+			'devolvido' => false,
+		]);
 		
-		$emprestimo = Emprestimo::findOrFail( $id );
-		$emprestimo = $emprestimo -> update([
-				'data_devolucao' => date('Y-m-d'),
-				'devolvido' => true,
-				]);
-        
-        return Redirect::to('/emprestimos/listar');
+		return redirect()->route('emprestimos.get');
 	}
 }

@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Rota padrao, da raiz --> "redireciona" para lista de emprestimos
 Route::get('/', [EmprestimosController::class, 'show'])->name('home');
 
-Route::get('/emprestimos/novo', [EmprestimosController::class, 'create']);
-Route::post('/emprestimos/novo', [EmprestimosController::class, 'store'])->name('registrar_emprestimo');
-Route::get('/emprestimos/listar', [EmprestimosController::class, 'show'])->name('emprestimos');
-Route::put('/emprestimos/devolver/{id}', [EmprestimosController::class, 'devolver']);
+Route::get('/emprestimos/listar', [EmprestimosController::class, 'show'])->name('emprestimos.get');
+Route::post('/emprestimos/editar', [EmprestimosController::class, 'update'])->name('emprestimo.post');
+Route::get('/emprestimos/deletar', [EmprestimosController::class, 'delete'])->name('emprestimo.delete');
+Route::get('/emprestimos/novo', [EmprestimosController::class, 'create'])->name('add-emprestimo.get');
+Route::post('/emprestimos/novo', [EmprestimosController::class, 'store'])->name('add-emprestimo.post');
 
 Route::get('/clientes/listar', [ClienteController::class, 'show'])->name('clientes.get');
 Route::post('/clientes/editar', [ClienteController::class, 'update'])->name('cliente.post');
