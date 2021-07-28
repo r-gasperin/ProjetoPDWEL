@@ -82,7 +82,7 @@
 								<option value="1" selected>Sim</option>
 							@endif
 						</select>
-						@if ($errors->has('devolvido'))
+						@if ($errors->has('devolvido') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('devolvido') }}

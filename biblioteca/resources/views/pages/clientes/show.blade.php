@@ -51,8 +51,12 @@
 						<input type="hidden" name="id" value="{{ $obj->id }}" form="deletar{{ $obj->id }}"/>
 					</td>
 					<td>
-						<input type="text" name="nome" value="{{ $obj->nome }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('nome'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="nome" value="{{ old('nome') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="text" name="nome" value="{{ $obj->nome }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('nome') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('nome') }}
@@ -66,8 +70,12 @@
 						<input type="text" value="{{ $obj->rg }}" disabled/>
 					</td>
 					<td>
-						<input type="text" name="ddd" value="{{ $obj->ddd }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('ddd'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="ddd" value="{{ old('ddd') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="text" name="ddd" value="{{ $obj->ddd }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('ddd') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('ddd') }}
@@ -77,8 +85,12 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="telefone" value="{{ $obj->telefone }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('telefone'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="telefone" value="{{ old('telefone') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="text" name="telefone" value="{{ $obj->telefone }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('telefone') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('telefone') }}
@@ -86,8 +98,12 @@
 						@endif
 					</td>
 					<td colspan="2">
-						<input type="text" name="endereco" value="{{ $obj->endereco }}" form="atualizar{{ $obj->id }}" class="double"/>
-						@if ($errors->has('endereco'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="endereco" value="{{ old('endereco') }}" form="atualizar{{ $obj->id }}" class="double"/>
+						@else
+							<input type="text" name="endereco" value="{{ $obj->endereco }}" form="atualizar{{ $obj->id }}" class="double"/>
+						@endif
+						@if ($errors->has('endereco') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('endereco') }}

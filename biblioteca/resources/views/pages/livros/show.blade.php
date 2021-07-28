@@ -51,8 +51,12 @@
 						<input type="hidden" name="id" value="{{ $obj->id }}" form="deletar{{ $obj->id }}"/>
 					</td>
 					<td>
-						<input type="text" name="titulo" value="{{ $obj->titulo }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('titulo'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="titulo" value="{{ old('titulo') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="text" name="titulo" value="{{ $obj->titulo }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('titulo') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('titulo') }}
@@ -60,8 +64,12 @@
 						@endif
 					</td>
 					<td>
-						<input type="text" name="autor" value="{{ $obj->autor }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('autor'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="autor" value="{{ old('autor') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="text" name="autor" value="{{ $obj->autor }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('autor') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('autor') }}
@@ -69,8 +77,12 @@
 						@endif
 					</td>
 					<td>
-						<input type="text" name="editora" value="{{ $obj->editora }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('editora'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="editora" value="{{ old('editora') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="text" name="editora" value="{{ $obj->editora }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('editora') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('editora') }}
@@ -78,8 +90,12 @@
 						@endif
 					</td>
 					<td>
-						<input type="number" name="ano" value="{{ $obj->ano }}" form="atualizar{{ $obj->id }}"/>
-						@if ($errors->has('ano'))
+						@if (old('id') == $obj->id)
+							<input type="number" name="ano" value="{{ old('ano') }}" form="atualizar{{ $obj->id }}"/>
+						@else
+							<input type="number" name="ano" value="{{ $obj->ano }}" form="atualizar{{ $obj->id }}"/>
+						@endif
+						@if ($errors->has('ano') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('ano') }}
@@ -92,8 +108,12 @@
 						<input type="text" value="{{ $obj->isbn }}" disabled/>
 					</td>
 					<td colspan="2">
-						<input type="text" name="descricao" value="{{ $obj->descricao }}" form="atualizar{{ $obj->id }}" class="double"/>
-						@if ($errors->has('descricao'))
+						@if (old('id') == $obj->id)
+							<input type="text" name="descricao" value="{{ old('descricao') }}" form="atualizar{{ $obj->id }}" class="double"/>
+						@else
+							<input type="text" name="descricao" value="{{ $obj->descricao }}" form="atualizar{{ $obj->id }}" class="double"/>
+						@endif
+						@if ($errors->has('descricao') && old('id') == $obj->id)
 							<br>
 							<small class="error">
 								{{ $errors->first('descricao') }}
