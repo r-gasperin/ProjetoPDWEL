@@ -1,0 +1,52 @@
+
+ * CONTROLLERS ESTÃO ASSOCIADOS ÀS VIEWS!!
+
+--------------------------------------------------
+
+get 	/						: "redireciona" para lista de empréstimos
+
+CRUD Emprestimos
+----------------
+get 	/emprestimos/listar		: retorna página com todos os empréstimos
+post	/emprestimos/editar		: envia form de atualização do empréstimo selecionado
+get 	/emprestimos/deletar	: deleta empréstimo selecionado
+get 	/emprestimos/novo		: retorna página de cadastro de empréstimo
+post 	/emprestimos/novo		: envia form de cadastro de empréstimo
+
+CRUD Clientes
+-------------
+get 	/clientes/listar		: retorna página com todos os clientes
+post 	/clientes/editar		: envia form de atualização do cliente selecionado
+get 	/clientes/deletar		: deleta cliente selecionado
+get 	/clientes/novo			: retorna página de cadastro de cliente
+post 	/clientes/novo			: envia form de cadastro de cliente
+
+CRUD Livros
+-----------
+get 	/livros/listar			: retorna página com todos os livros
+post 	/livros/editar			: envia form de atualização do livro selecionado
+get 	/livros/deletar			: deleta livro selecionado
+get 	/livros/novo			: retorna página de cadastro de livro
+post 	/livros/novo			: envia form de cadastro de livro
+
+
++--------+----------+---------------------+---------------------+---------------------------------------------------+------------+
+| Domain | Method   | URI                 | Name                | Action                                            | Middleware |
++--------+----------+---------------------+---------------------+---------------------------------------------------+------------+
+|        | GET|HEAD | /                   | home                | App\Http\Controllers\EmprestimosController@show   | web        |
+|        | GET|HEAD | clientes/deletar    | cliente.delete      | App\Http\Controllers\ClienteController@delete     | web        |
+|        | POST     | clientes/editar     | cliente.post        | App\Http\Controllers\ClienteController@update     | web        |
+|        | GET|HEAD | clientes/listar     | clientes.get        | App\Http\Controllers\ClienteController@show       | web        |
+|        | GET|HEAD | clientes/novo       | add-cliente.get     | App\Http\Controllers\ClienteController@create     | web        |
+|        | POST     | clientes/novo       | add-cliente.post    | App\Http\Controllers\ClienteController@store      | web        |
+|        | GET|HEAD | emprestimos/deletar | emprestimo.delete   | App\Http\Controllers\EmprestimosController@delete | web        |
+|        | POST     | emprestimos/editar  | emprestimo.post     | App\Http\Controllers\EmprestimosController@update | web        |
+|        | GET|HEAD | emprestimos/listar  | emprestimos.get     | App\Http\Controllers\EmprestimosController@show   | web        |
+|        | GET|HEAD | emprestimos/novo    | add-emprestimo.get  | App\Http\Controllers\EmprestimosController@create | web        |
+|        | POST     | emprestimos/novo    | add-emprestimo.post | App\Http\Controllers\EmprestimosController@store  | web        |
+|        | GET|HEAD | livros/deletar      | livro.delete        | App\Http\Controllers\LivrosController@delete      | web        |
+|        | POST     | livros/editar       | livro.post          | App\Http\Controllers\LivrosController@update      | web        |
+|        | GET|HEAD | livros/listar       | livros.get          | App\Http\Controllers\LivrosController@show        | web        |
+|        | GET|HEAD | livros/novo         | add-livro.get       | App\Http\Controllers\LivrosController@create      | web        |
+|        | POST     | livros/novo         | add-livro.post      | App\Http\Controllers\LivrosController@store       | web        |
++--------+----------+---------------------+---------------------+---------------------------------------------------+------------+
