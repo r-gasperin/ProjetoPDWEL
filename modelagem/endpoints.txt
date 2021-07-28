@@ -3,13 +3,13 @@
 
 --------------------------------------------------
 
-get 	/						: "redireciona" para lista de empréstimos
+get 	/				: "redireciona" para lista de empréstimos
 
 CRUD Emprestimos
 ----------------
 get 	/emprestimos/listar		: retorna página com todos os empréstimos
 post	/emprestimos/editar		: envia form de atualização do empréstimo selecionado
-get 	/emprestimos/deletar	: deleta empréstimo selecionado
+get 	/emprestimos/deletar		: deleta empréstimo selecionado
 get 	/emprestimos/novo		: retorna página de cadastro de empréstimo
 post 	/emprestimos/novo		: envia form de cadastro de empréstimo
 
