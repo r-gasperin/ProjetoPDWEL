@@ -32,7 +32,7 @@ DB_PASSWORD=${PASS}
  - Clonar o repositório e acessar a pasta do projeto:
 ```sh
 $ git clone https://github.com/r-gasperin/ProjetoPDWEL.git
-$ cd biblioteca
+$ cd ProjetoPDWEL/biblioteca
 ```
  - Instalar as dependências do Composer e do Node, e compilar os *Assets*:
 ```sh
