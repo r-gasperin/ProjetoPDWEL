@@ -40,9 +40,10 @@ $ composer install
 $ npm install
 $ npm run dev
 ```
- - Executar as *migrations* e rodar o projeto:
+ - Executar as *migrations*, gerar a chave de criptografia e rodar o projeto:
 ```sh
-$ php artisan migrate
+$ php artisan migrate # lembre-se de configurar o **.env**!
+$ php artisan key:generate
 $ php artisan serve
 ```
  - No navegador, acessar o endereço:
@@ -50,11 +51,15 @@ $ php artisan serve
 localhost:8000
 ```
 
+Em caso de sucesso, aparecerá a seguinte tela:
+
+![FirstUse](./screenshots/first_use.png)
+
 # Enunciado do Projeto Final:
 
 Vocês deverão implementar uma aplicação Web a ser entregue até o dia 04/08/21.
 Pode ser uma demanda pessoal ou profissional que você tenha.
-Pode ser feito em grupos com no máximo 4 integrantes, pode usar o framework MVC de sua preferência.
+Pode ser feito em grupos com no máximo 4 integrantes, pode usar o *framework* MVC de sua preferência.
 
 Requisitos mínimos:
 
@@ -62,4 +67,4 @@ Requisitos mínimos:
  - MVC
  - Responsiva
 
-Você deve criar um projeto no GitHub com a descrição do projeto e a equipe integrante na página inicial, instruções de deployment.
+Você deve criar um projeto no GitHub com a descrição do projeto e a equipe integrante na página inicial, instruções de *deployment*.
