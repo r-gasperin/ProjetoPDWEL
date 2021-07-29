@@ -42,7 +42,7 @@ $ npm run dev
 ```
  - Executar as *migrations*, gerar a chave de criptografia e rodar o projeto:
 ```sh
-$ php artisan migrate # lembre-se de configurar o **.env**!
+$ php artisan migrate # lembre-se de configurar o .env
 $ php artisan key:generate
 $ php artisan serve
 ```
