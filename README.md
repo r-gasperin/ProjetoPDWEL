@@ -16,7 +16,7 @@ TADS - IFSP - 2021/1
 # Intruções de *deployment*
 ## 1. Ambiente
  - Instalar PHP + Composer + Node + SGBD (pref. MySQL)
-    - descomentar as extensões *fileinfo* e *pdo_mysql*, do arquivo **php.ini**
+    - descomentar as extensões *fileinfo* e *pdo_mysql*, no arquivo **php.ini**
  - Criar a base de dados **biblioteca**, no SGBD
  - Configurar a conexão com SGBD no **.env**; exemplo:
 ```sh
